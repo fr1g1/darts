@@ -2,7 +2,6 @@ import { useState, type ReactNode } from 'react'
 import type { GameConfig, ModeId } from '../engine'
 import { useT, type TKey } from '../i18n'
 import { DEFAULT_CONFIGS, MAX_PLAYERS, sameConfig, useApp, type GamePreset } from '../store/app'
-import { configLabel } from '../share/format'
 import { Avatar, Button, Card, Label, Segmented, Stepper, Toggle, TopBar } from '../components/ui'
 
 function ShuffleIcon() {
@@ -38,12 +37,7 @@ function PresetTable({ presets, current, onPick, onDelete }: { presets: GamePres
                   className={`cursor-pointer border-b border-line transition last:border-0 hover:bg-surface-2 ${active ? 'bg-surface-2' : ''}`}
                   style={active ? { boxShadow: 'inset 4px 0 0 var(--green)' } : undefined}
                 >
-                  <td className="py-2.5 pr-2 pl-4">
-                    <div className="truncate font-semibold">{p.name}</div>
-                    <div className="truncate text-sm text-muted">
-                      {configLabel(p, t)}
-                    </div>
-                  </td>
+                  <td className="truncate py-3 pr-2 pl-4 font-semibold">{p.name}</td>
                   <td className="w-24 pr-2 text-right text-xs font-semibold tracking-wide text-green uppercase">{active ? t('presetActive') : ''}</td>
                   <td className="w-12 pr-2 text-right">
                     <button
@@ -90,7 +84,7 @@ function SavePreset({ cfg }: { cfg: GameConfig }) {
       <Button
         className="w-full"
         onClick={() => {
-          setName(configLabel({ config: cfg }, t))
+          setName('')
           setOpen(true)
           setSaved(false)
         }}
@@ -384,12 +378,12 @@ export function Setup() {
                 <button
                   key={m}
                   onClick={() => setMode(m)}
-                  className={`flex min-h-20 flex-col justify-between rounded-2xl border p-3 text-left transition last:col-span-2 sm:last:col-span-1 ${
+                  aria-pressed={mode === m}
+                  className={`flex h-14 items-center justify-center rounded-2xl border px-3 transition last:col-span-2 sm:last:col-span-1 ${
                     mode === m ? 'border-transparent bg-ink text-bg' : 'border-line bg-surface hover:border-ink/40'
                   }`}
                 >
                   <span className="num text-2xl font-bold uppercase">{t(`mode_${m}` as TKey)}</span>
-                  <span className={`text-xs leading-tight ${mode === m ? 'opacity-75' : 'text-muted'}`}>{t(`modeDesc_${m}` as TKey)}</span>
                 </button>
               ))}
             </div>

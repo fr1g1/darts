@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* side-by-side game layout: landscape tablets/phones and anything ≥1024px wide */
-@custom-variant wide (@media (min-width: 768px) and (orientation: landscape), (min-width: 1024px));
+@custom-variant wide (@media (min-width: 560px) and (orientation: landscape), (min-width: 1024px));
 /* three columns (score | keypad | dartboard) – only big mouse-driven screens; tablets get keypad OR board like phones */
 @custom-variant tri (@media (min-width: 1280px) and (orientation: landscape) and (pointer: fine));
 /* very low screens (phones in landscape) */

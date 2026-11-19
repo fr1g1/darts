@@ -160,9 +160,9 @@ export function ScoreBoard({ game, snap }: BoardProps) {
   return (
     <div className="flex h-full flex-col gap-2">
       {target !== null && (
-        <div className="flex shrink-0 items-center gap-3 rounded-2xl bg-ink px-4 py-0.5 text-bg sm:py-1.5">
+        <div className="flex shrink-0 items-center gap-3 rounded-2xl bg-ink px-4 py-0.5 text-bg sm:py-1.5 short:py-0">
           <span className="text-xs font-semibold uppercase tracking-widest opacity-70">{t('target')}</span>
-          <span className="num text-3xl font-bold sm:text-4xl">{target === 25 ? 'BULL' : target}</span>
+          <span className="num text-3xl font-bold sm:text-4xl short:text-2xl">{target === 25 ? 'BULL' : target}</span>
           <span className="num ml-auto text-lg opacity-70">
             {t('round')} {snap.round}/{rounds}
           </span>
@@ -170,7 +170,7 @@ export function ScoreBoard({ game, snap }: BoardProps) {
       )}
       {/* the round table is the whole scoreboard: rounds, Σ total and per-player averages; rows stretch to the available height */}
       <div className="flex min-h-0 flex-1 overflow-y-auto rounded-2xl border border-line bg-surface">
-        <table className="num h-full w-full table-fixed text-center text-lg leading-tight sm:text-2xl lg:text-3xl">
+        <table className="num h-full w-full table-fixed text-center text-lg leading-tight sm:text-2xl lg:text-3xl short:text-lg">
           <colgroup>
             <col className="w-[27%]" />
             {shown.map((r) => (
@@ -198,13 +198,13 @@ export function ScoreBoard({ game, snap }: BoardProps) {
                 <tr key={p.id} className="border-t border-line" style={active ? { boxShadow: `inset 4px 0 0 ${p.color}` } : undefined}>
                   <td className="px-2 py-0 text-left font-sans leading-tight sm:py-1">
                     <div className="flex items-center gap-1.5">
-                      <span className="min-w-0 truncate text-sm leading-none font-semibold sm:text-lg sm:leading-tight lg:text-xl" style={{ color: p.color }}>
+                      <span className="min-w-0 truncate text-sm leading-none font-semibold sm:text-lg sm:leading-tight lg:text-xl short:text-sm" style={{ color: p.color }}>
                         {p.name}
                       </span>
                       <LegPips won={snap.legsWon[i]} need={cfg.legs} />
                     </div>
-                    <div className="mt-0.5 text-[11px] leading-none font-normal sm:mt-0 sm:text-sm sm:leading-tight lg:text-base">
-                      <Averages snap={snap} p={i} unitClass="hidden sm:inline" wrap />
+                    <div className="mt-0.5 text-[11px] leading-none font-normal sm:mt-0 sm:text-sm sm:leading-tight lg:text-base short:text-xs">
+                      <Averages snap={snap} p={i} unitClass="hidden sm:inline short:hidden" wrap />
                     </div>
                   </td>
                   {shown.map((r) => {
@@ -261,9 +261,9 @@ export function CricketBoard({ game, snap }: BoardProps) {
         <div className="truncate text-sm font-semibold sm:text-base" style={{ color: p.color }}>
           {p.name}
         </div>
-        {cfg.scoring !== 'none' && <div className="num text-2xl leading-tight font-bold sm:text-4xl">{st.score[i]}</div>}
+        {cfg.scoring !== 'none' && <div className="num text-2xl leading-tight font-bold sm:text-4xl short:text-2xl">{st.score[i]}</div>}
         <div className="flex flex-col items-center text-xs leading-tight font-normal text-muted sm:text-sm">
-          <span className="inline-flex items-center gap-0.5 whitespace-nowrap" title={t('mpd')}>
+          <span className="inline-flex items-center gap-0.5 whitespace-nowrap short:hidden" title={t('mpd')}>
             <AvgIcon /> <b className="num text-ink">{stats.avgDart.toFixed(2)}</b>/{t('perDart')}
           </span>
           <span className="inline-flex items-center gap-0.5 whitespace-nowrap" title={t('mpr')}>

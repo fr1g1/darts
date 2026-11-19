@@ -38,11 +38,6 @@ export const en: Dict = {
   mode_shanghai: 'Shanghai',
   mode_baseball: 'Baseball',
   mode_cricket: 'Cricket',
-  modeDesc_x01: '180 / 301 / 501 / 701 – count down to zero',
-  modeDesc_highscore: 'Most points in a set number of rounds',
-  modeDesc_shanghai: 'Round = target number, Shanghai wins',
-  modeDesc_baseball: '9 innings, hit the inning number',
-  modeDesc_cricket: '20–15 and bull, close and score',
   rules_x01:
     'Each player starts with the given score and subtracts each throw. Reach exactly zero using the chosen finish. A bust (below zero, 1 left with Double/Master Out, zero without a valid last dart) resets the score to the start of the turn.',
   rules_highscore: 'Three darts per round. Highest total wins.',

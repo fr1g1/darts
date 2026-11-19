@@ -170,7 +170,7 @@ export function Game() {
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
       <header className="shrink-0 border-b border-line bg-bg">
-        <div className="mx-auto flex h-13 max-w-[1600px] items-center gap-1 px-2 sm:px-4">
+        <div className="mx-auto flex h-13 max-w-[1600px] items-center gap-1 px-2 sm:px-4 short:h-11">
           <button onClick={() => app.go('home')} className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-surface-2" aria-label={t('home')}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 18l-6-6 6-6" />
@@ -181,6 +181,7 @@ export function Game() {
             <div className="tri:hidden">
               <Segmented
                 nowrap
+                compact
                 value={app.inputView}
                 onChange={app.setInputView}
                 options={[
@@ -217,7 +218,7 @@ export function Game() {
 
       {/* Keypad and tap-on-board share one input box of identical size: switching views never moves the layout */}
       <main
-        className={`mx-auto grid min-h-0 w-full max-w-[1600px] flex-1 grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)_auto] gap-2 p-2 sm:gap-3 sm:p-3 wide:grid-cols-[minmax(0,1fr)_minmax(320px,min(50vw,calc(100dvh-200px)))] wide:grid-rows-1 ${
+        className={`mx-auto grid min-h-0 w-full max-w-[1600px] flex-1 grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)_auto] gap-2 p-2 sm:gap-3 sm:p-3 wide:grid-cols-[minmax(0,1fr)_minmax(320px,min(50vw,calc(100dvh-200px)))] wide:grid-rows-1 short:gap-2 short:p-1.5 short:wide:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] ${
           showBoard ? 'tri:grid-cols-[minmax(300px,1fr)_minmax(300px,420px)_min(38vw,calc(100dvh-100px))]' : ''
         }`}
       >
@@ -231,7 +232,7 @@ export function Game() {
               <Keypad {...inputProps} />
             </div>
             {boardInCol2 && (
-              <div className="flex h-full flex-col gap-1.5 tri:hidden">
+              <div className="flex h-full flex-col gap-1.5 tri:hidden short:flex-row">
                 <div className="flex min-h-0 flex-1 items-center justify-center">
                   <Dartboard onDart={onDart} disabled={blocked} highlight={highlight} className="h-full w-full" />
                 </div>

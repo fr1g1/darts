@@ -51,7 +51,7 @@ function MissButton({ onDart, disabled, setMult, font = 'text-2xl' }: Pick<Input
 /** Controls under the dartboard: 0 (miss) and undo */
 export function BoardControls(props: Pick<InputProps, 'onDart' | 'onUndo' | 'canUndo' | 'disabled'>) {
   return (
-    <div className="grid h-12 shrink-0 grid-cols-2 gap-1.5">
+    <div className="grid h-12 shrink-0 grid-cols-2 gap-1.5 short:h-full short:w-20 short:grid-cols-1 short:grid-rows-2">
       <MissButton {...props} setMult={() => {}} />
       <UndoButton {...props} />
     </div>

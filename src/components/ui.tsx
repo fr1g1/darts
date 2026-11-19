@@ -39,21 +39,24 @@ export function Segmented<T extends string | number>({
   onChange,
   className = '',
   nowrap,
+  compact,
 }: {
   value: T
   options: { value: T; label: ReactNode }[]
   onChange: (v: T) => void
   className?: string
   nowrap?: boolean
+  /** smaller buttons, e.g. inside a top bar */
+  compact?: boolean
 }) {
   return (
-    <div className={`flex ${nowrap ? 'flex-nowrap' : 'flex-wrap'} gap-1 rounded-xl bg-surface-2 p-1 ${className}`}>
+    <div className={`flex ${nowrap ? 'flex-nowrap' : 'flex-wrap'} rounded-xl bg-surface-2 ${compact ? 'gap-0.5 p-0.5' : 'gap-1 p-1'} ${className}`}>
       {options.map((o) => (
         <button
           key={String(o.value)}
           type="button"
           onClick={() => onChange(o.value)}
-          className={`min-h-10 flex-1 rounded-lg px-3 text-sm font-semibold whitespace-nowrap transition ${
+          className={`flex-1 rounded-lg text-sm font-semibold whitespace-nowrap transition ${compact ? 'flex h-8 items-center justify-center px-2.5' : 'min-h-10 px-3'} ${
             o.value === value ? 'bg-surface text-ink shadow-sm ring-1 ring-line' : 'text-muted hover:text-ink'
           }`}
         >

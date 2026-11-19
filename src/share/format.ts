@@ -10,9 +10,8 @@ export function configLabel(g: Pick<Game, 'config'>, t: T): string {
   const legs = c.legs > 1 ? ` · first to ${c.legs}` : ''
   switch (c.mode) {
     case 'x01': {
-      const io = `${c.inMode === 'double' ? 'DI' : 'SI'}${c.outMode === 'double' ? 'DO' : c.outMode === 'master' ? 'MO' : 'SO'}`
       const lim = c.maxRounds ? ` · ${c.maxRounds} ${t('rounds').toLowerCase()}` : ''
-      return `${c.start} ${io}${lim}${legs}`
+      return `${c.start}${lim}${legs}`
     }
     case 'highscore':
       return `${t('mode_highscore')} · ${c.rounds} ${t('rounds').toLowerCase()}${legs}`

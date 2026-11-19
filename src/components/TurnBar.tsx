@@ -15,10 +15,10 @@ export function TurnBar({ game, snap }: { game: Game; snap: Snapshot }) {
       ? suggestCheckout(x01.rem[snap.current], 3 - snap.turnDarts.length, cfg.outMode)
       : null
   return (
-    <div className="rounded-2xl border border-line bg-surface p-2.5 sm:p-3">
+    <div className="rounded-2xl border border-line bg-surface p-2.5 sm:p-3 short:px-2 short:py-1.5">
       <div className="flex items-center gap-2">
         <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: p.color }} />
-        <span className="truncate font-semibold">{p.name}</span>
+        <span className="truncate font-semibold short:text-sm">{p.name}</span>
         {checkout && (
           <span className="flex items-center gap-1" title={t('checkout')}>
             {checkout.map((d, k) => (
@@ -33,13 +33,13 @@ export function TurnBar({ game, snap }: { game: Game; snap: Snapshot }) {
           {t('round')} {snap.round}
         </span>
       </div>
-      <div className="mt-2 grid grid-cols-[1fr_1fr_1fr_auto] gap-1.5">
+      <div className="mt-2 grid grid-cols-[1fr_1fr_1fr_auto] gap-1.5 short:mt-1">
         {[0, 1, 2].map((i) => {
           const d = snap.turnDarts[i]
           return (
             <div
               key={i}
-              className={`num flex h-11 items-center justify-center rounded-lg text-xl font-bold ${
+              className={`num flex h-11 items-center justify-center rounded-lg text-xl font-bold short:h-8 short:text-lg ${
                 d ? 'animate-pop bg-surface-2' : i === snap.turnDarts.length ? 'border-2 border-dashed border-gold/70' : 'border border-dashed border-line'
               } ${d?.m === 3 ? 'text-accent' : d?.m === 2 ? 'text-green' : ''}`}
             >
@@ -47,12 +47,12 @@ export function TurnBar({ game, snap }: { game: Game; snap: Snapshot }) {
             </div>
           )
         })}
-        <div className="num flex h-11 min-w-14 items-center justify-center rounded-lg bg-ink px-2 text-2xl font-bold text-bg">
+        <div className="num flex h-11 min-w-14 items-center justify-center rounded-lg bg-ink px-2 text-2xl font-bold text-bg short:h-8 short:text-xl">
           {mode === 'x01' || mode === 'highscore' ? turnSum : snap.turnDarts.length ? turnSum : '·'}
         </div>
       </div>
       {/* always rendered with a fixed height so the bar never jumps */}
-      <div className="mt-1.5 flex h-5 items-center gap-1.5 truncate text-xs text-muted">
+      <div className="mt-1.5 flex h-5 items-center gap-1.5 truncate text-xs text-muted short:mt-1 short:h-4">
         <span>{t('lastTurn')}:</span>
         {last && lastP ? (
           <>

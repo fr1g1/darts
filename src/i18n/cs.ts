@@ -37,11 +37,6 @@ export const cs = {
   mode_shanghai: 'Shanghai',
   mode_baseball: 'Baseball',
   mode_cricket: 'Cricket',
-  modeDesc_x01: '180 / 301 / 501 / 701 – odečítání na nulu',
-  modeDesc_highscore: 'Nejvíc bodů za daný počet kol',
-  modeDesc_shanghai: 'Kolo = cílové číslo, Shanghai vyhrává',
-  modeDesc_baseball: '9 směn, zásahy čísla směny',
-  modeDesc_cricket: '20–15 a střed, zavírání a body',
   rules_x01:
     'Hráč začíná s bodovým základem a odečítá hodnoty hodů. Cílem je dostat se přesně na nulu podle zvoleného zakončení. Bust (pod nulu, zůstatek 1 při Double/Master Out, nula bez správné šipky) vrací skóre na začátek kola.',
   rules_highscore: 'Každý hráč hází tři šipky v každém kole. Vyhrává hráč s nejvyšším počtem bodů.',
