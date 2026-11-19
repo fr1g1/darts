@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* side-by-side game layout: landscape tablets/phones and anything ≥1024px wide */
+@custom-variant wide (@media (min-width: 768px) and (orientation: landscape), (min-width: 1024px));
+/* three columns (score | keypad | dartboard) – only big mouse-driven screens; tablets get keypad OR board like phones */
+@custom-variant tri (@media (min-width: 1280px) and (orientation: landscape) and (pointer: fine));
+/* very low screens (phones in landscape) */
+@custom-variant short (@media (max-height: 500px));
+
+:root {
+  --bg: #f2ece0;
+  --surface: #fffaf1;
+  --surface-2: #e9e0ce;
+  --ink: #17201b;
+  --muted: #676d64;
+  --line: #d6ccb8;
+  --accent: #c8302c;
+  --accent-ink: #ffffff;
+  --green: #1d7446;
+  --gold: #b88a22;
+  --board-black: #1b1b1b;
+  --board-cream: #efe3c6;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e1411;
+  --surface: #161f1a;
+  --surface-2: #1f2a24;
+  --ink: #efe6d2;
+  --muted: #8e998f;
+  --line: #2b3a31;
+  --accent: #e2483d;
+  --accent-ink: #ffffff;
+  --green: #35a86a;
+  --gold: #e3b24b;
+  --board-black: #0b0b0b;
+  --board-cream: #e8dcbf;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='system'] {
+    --bg: #0e1411;
+    --surface: #161f1a;
+    --surface-2: #1f2a24;
+    --ink: #efe6d2;
+    --muted: #8e998f;
+    --line: #2b3a31;
+    --accent: #e2483d;
+    --accent-ink: #ffffff;
+    --green: #35a86a;
+    --gold: #e3b24b;
+    --board-black: #0b0b0b;
+    --board-cream: #e8dcbf;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-green: var(--green);
+  --color-gold: var(--gold);
+  --font-display: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-sans: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+.num {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* subtle chalk grain on dark surfaces */
+.grain {
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 4%, transparent) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+/* Player cards stretch to fill the score area; content scales with the card size.
+   Tall cards: name / number / averages stacked. Wide cards: name + averages left, number right. */
+.pcard {
+  container-type: size;
+  min-height: 56px;
+}
+.pcard-inner {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 2px 12px;
+}
+.pcard-head {
+  font-size: clamp(0.95rem, 13cqh, 1.6rem);
+}
+.pcard-extra {
+  font-size: clamp(0.85rem, 10cqh, 1.3rem);
+}
+.pcard-num {
+  align-self: center;
+  line-height: 1;
+  font-size: clamp(1.4rem, 42cqh, 5rem);
+}
+@container (min-aspect-ratio: 5/2) {
+  .pcard-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: minmax(0, 1fr) auto auto minmax(0, 1fr);
+  }
+  .pcard-head {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: clamp(1rem, 24cqh, 1.7rem);
+  }
+  .pcard-extra {
+    grid-column: 1;
+    grid-row: 3;
+    font-size: clamp(0.85rem, 19cqh, 1.35rem);
+  }
+  .pcard-num {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    font-size: clamp(1.6rem, 72cqh, 5.5rem);
+  }
+}
+/* narrow cards: drop the "/dart · /round" units so both averages stay on one line */
+@container (max-width: 230px) {
+  .avg-unit {
+    display: none;
+  }
+}
+@container (max-height: 62px) and (max-aspect-ratio: 5/2) {
+  .pcard-extra {
+    display: none;
+  }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.animate-pop {
+  animation: pop 260ms ease-out;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 0; }
+  15%, 70% { opacity: 1; }
+}
+.animate-flash {
+  animation: flash 1400ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop, .animate-flash { animation-duration: 1ms; }
+}

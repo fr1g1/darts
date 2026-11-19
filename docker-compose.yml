@@ -1,0 +1,17 @@
+services:
+  darts:
+    build: .
+    restart: always
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.darts.rule=Host(`darts.frigi.me`)"
+      - "traefik.http.routers.darts.entrypoints=web"
+      - "traefik.http.services.darts.loadbalancer.server.port=3003"
+
+    networks:
+      - traefik_net
+
+networks:
+  traefik_net:
+    external: true
